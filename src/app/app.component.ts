@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     // this._databaseService.getRealtimeRankings().then(() => {
     // this._dataService.realtimeToRanking();
     // });
+    console.log('Connected DZ');
   }
 
 }
