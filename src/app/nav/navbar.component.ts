@@ -10,4 +10,12 @@ export class NavbarComponent {
     constructor(
     ) { }
 
+    signin: boolean = false;
+
+    /**
+     * Toggles the signin dialogue box
+     */
+    public toggleSignin(): void {
+        this.signin = !this.signin;
+    }
 }
