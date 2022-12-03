@@ -1,0 +1,55 @@
+@import "../../styles.scss";
+
+.nav-body {
+    width: 100%;
+    height: $heightNav;
+    background-color: $colorGreen;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-title {
+    margin-left: 2.5rem;
+    margin-right: auto;
+    padding-top: 4px;
+    font-family: $fontPrimaryBold;
+    font-size: 1.5rem;
+}
+
+.nav-title:hover {
+    font-size: 1.55rem;
+}
+
+.nav-links {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-link {
+    margin-left: 2rem;
+    padding-top: 4px;
+    font-family: $fontPrimary;
+    font-size: 1rem;
+}
+
+.nav-link:hover {
+    border-bottom: 1px solid $colorBlack;
+}
+
+.nav-pfp {
+    margin-left: 2rem;
+    margin-right: 2.5rem;
+    padding: 0.5rem;
+    background-color: $colorBlack;
+    border-radius: 100%;
+    font-family: $fontAS;
+    font-size: 1rem;
+    color: $colorGreen;
+}
+
+.nav-pfp:hover {
+    background-color: $colorBlack2;
+}

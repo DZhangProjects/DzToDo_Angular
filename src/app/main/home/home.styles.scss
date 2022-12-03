@@ -1,5 +1,265 @@
+@import "../../../styles.scss";
+
 .home-bg {
-    background-color: red;
-    width: 100vw;
-    height: 100vw;
+    background-color: $colorWhite;
+    width: 100%;
+    height: calc(100vh - #{$heightNav});
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.home-week {
+    width: 100%;
+    height: $heightWeek;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid $colorBlack;
+}
+
+.home-weekL, .home-weekR {
+    background-color: $colorBlue;
+    width: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: $fontAS;
+    font-size: 1rem;
+    border: 2px solid $colorBlack;
+}
+
+.home-weekL {
+    border-left: 4px solid $colorBlack;
+}
+
+.home-weekR {
+    border-right: 4px solid $colorBlack;
+}
+
+.home-weekDay {
+    width: $widthWeek;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 2px solid $colorBlack;
+    position: relative;
+}
+
+.home-weekDayTitle {
+    background-color: $colorPurple;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // font-family: $fontPrimaryBold;
+    font-size: 0.9rem;
+    // padding-top: 4px;
+    border-bottom: 4px solid $colorBlack;
+}
+
+.home-weekDayTasks {
+    width: 100%;
+    max-height: calc(100% - 20% - 4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.home-weekDayTasks::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.home-weekDayTask {
+    background-color: $colorOrange;
+    width: 100%;
+    // height: 35px !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    // font-family: $fontPrimary;
+    font-size: 0.9rem;
+    // padding: 4px 0 0 8px;
+    padding: 0.4rem;
+    // white-space: pre;
+    border-bottom: 1px solid $colorGray;
+}
+
+.home-weekDayNum {
+    background-color: $colorWhite;
+    margin-top: auto;
+    margin-left: auto;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    border: 2px solid $colorBlack;
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+}
+
+.home-bot {
+    width: calc(100%);
+    height: calc(100% - $heightWeek - 4px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-day {
+    width: calc(50% - 4px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 2px solid $colorBlack;
+}
+
+.home-title {
+    background-color: $colorPurple;
+    width: 100%;
+    height: calc(0.2*(#{$heightWeek}));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: $fontPrimaryBold;
+    font-size: 0.9rem;
+    padding-top: 4px;
+    border-bottom: 4px solid $colorBlack;
+}
+
+.home-hours {
+    width: 100%;
+    height: calc(0.2*(#{$heightWeek}));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.home-hours::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.home-hour {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 2px solid $colorGray;
+}
+
+.home-hourTime {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-right: 2px solid $colorGray;
+    font-family: $fontPrimaryBold;
+    font-size: 0.9rem;
+}
+
+.home-hourTask {
+    width: calc(85% - 2px - 1rem);
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: $fontPrimary;
+    font-size: 0.9rem;
+    padding-left: 1rem;
+}
+
+.home-goals {
+    width: calc(50% - 4px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid $colorBlack;
+}
+
+.home-goalsTitle {
+    border-bottom: 4px solid $colorBlack;
+    font-size: 3rem;
+}
+
+.home-goalsList {
+    margin-top: 1rem;
+    width: 50%;
+    max-height: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.home-goalsList::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.home-goal {
+    width: 90%;
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: $colorOrange;
+    border-radius: 0.5rem;
+    border: 4px solid $colorBlack;
+    font-size: 1.5rem;
+}
+
+.home-goal:hover {
+    background-color: $colorOrange2;
+}
+
+.home-newGoal {
+    margin-top: 2rem;
+    width: 20%;
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: $colorGreen;
+    border-radius: 0.5rem;
+    border: 4px solid $colorBlack;
+}
+
+.home-newGoal:hover {
+    background-color: $colorGreen2;
 }

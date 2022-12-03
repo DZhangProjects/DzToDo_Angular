@@ -1,1 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
+
+$colorGreen: #cbe8ba;
+$colorGreen2: #b6dd9f;
+$colorBlue: #a8c6fa;
+$colorPurple: #dacafb;
+$colorOrange: #ffd8ad;
+$colorOrange2: #ffd19f;
+$colorBlack: #232323;
+$colorBlack2: #333333;
+$colorGray: #c0c0c0;
+$colorWhite: #f5f5f5;
+
+$fontPrimary: "Amiko";
+$fontPrimaryBold: "Amiko-Bold";
+$fontAB: "FA-Brands";
+$fontAR: "FA-Regular";
+$fontAS: "FA-Solid";
+
+$widthWeek: calc(((100% - 4rem - 8px)/7) - 4px);
+
+$heightNav: 5.94rem;
+$heightWeek: 12rem;
+
+
+@font-face {
+    font-family: "Amiko";
+    src: url('./assets/fonts/Amiko-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Amiko-Bold";
+    src: url('./assets/fonts/Amiko-Bold.ttf');
+}
+
+@font-face {
+    font-family: "FA-Brands";
+    src: url('./assets/fonts/FontAwesomeBrands.otf');
+}
+
+@font-face {
+    font-family: "FA-Regular";
+    src: url('./assets/fonts/FontAwesomeRegular.otf');
+}
+
+@font-face {
+    font-family: "FA-Solid";
+    src: url('./assets/fonts/FontAwesomeSolid.otf');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.amiko {
+    font-family: $fontPrimary;
+    color: $colorBlack;
+    padding-top: 4px;
+}
+
+.amikoBold {
+    font-family: $fontPrimaryBold;
+    color: $colorBlack;
+    padding-top: 4px;
+}
+
+.ml {
+    margin-left: 1rem;
+}

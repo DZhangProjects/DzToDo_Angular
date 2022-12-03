@@ -1,21 +1,19 @@
 import { v4 } from 'uuid';
 
-class Task {
+class Goal {
 
     id: string;         // Unique ID for the Task
     title: string;      // Name of Task to display
     desc: string;       // Long description of Task to display when expanded
     date: Date;         // Date when Task is due (optional)
-    hour: number;       // Hour when Task is slotted
     priority: number;   // Level of priority of task (Has Due Date / Sometime Today / Sometime Soon / Sometime in the Future)
     complete: boolean;  // Whether or not a Task is completed
 
-    constructor(title: string, desc: string, priority: number, complete: boolean, hour: number, date?: Date) {
+    constructor(title: string, desc: string, priority: number, complete: boolean, date?: Date) {
         this.id = v4();                     // UUID
         this.title = title;
         this.desc = desc;
         this.date = date ? date : new Date();
-        this.hour = hour;
         this.priority = priority;
         this.complete = complete;
     }
