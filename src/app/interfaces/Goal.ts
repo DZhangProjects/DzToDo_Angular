@@ -1,16 +1,16 @@
 import { v4 } from 'uuid';
 
-class Goal {
+export class Goal {
 
-    id: string;         // Unique ID for the Task
-    title: string;      // Name of Task to display
-    desc: string;       // Long description of Task to display when expanded
-    date: Date;         // Date when Task is due (optional)
-    priority: number;   // Level of priority of task (Has Due Date / Sometime Today / Sometime Soon / Sometime in the Future)
-    complete: boolean;  // Whether or not a Task is completed
+    id: string;         // Unique ID for the Goal
+    title: string;      // Name of Goal to display
+    desc: string;       // Long description of Goal to display when expanded
+    date: Date;
+    priority: number;   // Level of priority of goal (Has Due Date / Sometime Today / Sometime Soon / Sometime in the Future)
+    complete: boolean;  // Whether or not a Goal is completed
 
-    constructor(title: string, desc: string, priority: number, complete: boolean, date?: Date) {
-        this.id = v4();                     // UUID
+    constructor(title: string, desc: string, priority: number, complete: boolean, date?: Date, id?: string) {
+        this.id = id ? id : v4();                     // UUID
         this.title = title;
         this.desc = desc;
         this.date = date ? date : new Date();

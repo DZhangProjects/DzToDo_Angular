@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { environment } from "../environments/environment";
 import { AnalyticsService } from './services/analytics.service';
+import { AuthService } from './services/auth.service';
+import { getAuth } from 'firebase/auth';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,10 @@ import { AnalyticsService } from './services/analytics.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private _analyticsService: AnalyticsService) { }
+  constructor(
+    private _analyticsService: AnalyticsService,
+    private _authService: AuthService
+  ) { }
 
   title = 'DzToDo';
 
@@ -21,6 +26,7 @@ export class AppComponent implements OnInit {
     // this._databaseService.getRealtimeRankings().then(() => {
     // this._dataService.realtimeToRanking();
     // });
+    this._authService.setProvider(getAuth(app));
     console.log('Connected DZ');
   }
 

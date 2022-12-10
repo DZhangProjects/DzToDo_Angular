@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'td-navbar',
@@ -8,14 +9,20 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
     constructor(
+        private _authService: AuthService
     ) { }
 
-    signin: boolean = false;
+    dock: boolean = false;
 
     /**
      * Toggles the signin dialogue box
      */
-    public toggleSignin(): void {
-        this.signin = !this.signin;
+    public toggleDock(): void {
+        this.dock = !this.dock;
+    }
+
+    public async signin(): Promise<void> {
+        console.log("Init Signin");
+        await this._authService.signin();
     }
 }

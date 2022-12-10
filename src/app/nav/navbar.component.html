@@ -4,8 +4,8 @@
         <div class="nav-link clickable">SCHEDULE</div>
         <div class="nav-link clickable">RULES</div>
     </div>
-    <div class="nav-pfp clickable" (click)="toggleSignin()">&#xf007;</div>
-    <div class="nav-signin" *ngIf="signin">
-        <img class="nav-signinBtn clickable" src="../../assets/images/standard-button-white.png" />
+    <div class="nav-pfp clickable" (click)="toggleDock()">&#xf007;</div>
+    <div class="nav-signin" *ngIf="dock">
+        <img class="nav-signinBtn clickable" (click)="signin()" src="../../assets/images/standard-button-white.png" />
     </div>
 </div>

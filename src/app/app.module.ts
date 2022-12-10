@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import "../app/interfaces/Date";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './main/home/home.component';
 import { NavbarComponent } from './nav/navbar.component';
+
+import { AnalyticsService } from './services/analytics.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -14,9 +18,12 @@ import { NavbarComponent } from './nav/navbar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    AnalyticsService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
