@@ -8,7 +8,7 @@ export class GoalRule extends Rule {
 
     constructor(repeat: "day" | "week" | "month" | "year" | "never", on: number, title: string, desc: string, priority: number, init?: Date, until?: Date, forDays?: number) {
         super(repeat, on, title, desc, priority, init, until);
-        this.forDays = forDays ? forDays : 0;
+        this.forDays = forDays ? forDays : 1;
     }
 
 
@@ -23,7 +23,7 @@ export class GoalRule extends Rule {
             return false;
         } else {
             const end: Date = new Date(new Date(start.getTime()).setDate(start.getDate() + this.forDays));
-            return (date >= start) && (date <= end);
+            return (date >= start) && (date < end);
         }
     }
 
@@ -33,17 +33,33 @@ export class GoalRule extends Rule {
      * @param {Date} date Date to check if rule applies
      * @returns {Goal | void} Goal if applies to date, undefined otherwise
      */
-    public getGoal(date: Date): Goal | void {
+    public getGoal(date: Date): Goal | undefined {
 
         if (this.isExpired(date) || date < this.init || !this.isWithinInterval(date)) { return; }
 
         const id: string = this.id + "-" + String(date.getFullYear()) + String(date.getMonth()) + String(date.getDate());
+        const init: Date = this.init;
         const title: string = this.title;
         const desc: string = this.desc;
         const priority: number = this.priority;
         const complete: boolean = false;
 
-        return new Goal(title, desc, priority, complete, date, id);
+        return new Goal(init, title, desc, priority, complete, date, id);
+    }
+
+
+    public getFirebaseGoalRule(): any {
+        return {
+            id: this.id,
+            init: this.init.getTime(),
+            until: this.until ? this.until : "undefined",
+            repeat: this.repeat,
+            on: this.on,
+            forDays: this.forDays,
+            title: this.title,
+            desc: this.desc,
+            priority: this.priority
+        }
     }
 
 }

@@ -1,16 +1,19 @@
 import { Injectable } from "@angular/core";
 import { Auth, getAuth, GoogleAuthProvider, OAuthCredential, signInWithPopup, User, UserCredential } from "firebase/auth";
+import { GoalRule } from "../interfaces/GoalRule";
+import { TaskRule } from "../interfaces/TaskRule";
+import { DataService } from "./data.service";
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    constructor() { }
+    constructor(private _dataService: DataService) { }
 
     private provider!: GoogleAuthProvider;
     private auth!: Auth;
     private authToken!: string;
-    private user!: User;
+    public user!: User;
 
     public setProvider(auth: Auth): void {
         this.auth = auth;
@@ -32,7 +35,10 @@ export class AuthService {
             } else {
                 this.authToken = credential.accessToken ? credential.accessToken : "";
                 this.user = result.user;
-                console.log("Login Successful: ", this.user.email);
+                await this._dataService.getRules(this.user.uid);
+                // await this._dataService.getTaskRules(this.user.uid);
+                // await this._dataService.getGoalRules(this.user.uid);
+                // console.log(this._dataService.getDisplayTasks(new Date()));
                 return true;
             }
         } catch (error) {

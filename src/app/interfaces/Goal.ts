@@ -1,45 +1,7 @@
-import { v4 } from 'uuid';
+import { Initiative } from './Initiative';
 
-export class Goal {
-
-    id: string;         // Unique ID for the Goal
-    title: string;      // Name of Goal to display
-    desc: string;       // Long description of Goal to display when expanded
-    date: Date;
-    priority: number;   // Level of priority of goal (Has Due Date / Sometime Today / Sometime Soon / Sometime in the Future)
-    complete: boolean;  // Whether or not a Goal is completed
-
-    constructor(title: string, desc: string, priority: number, complete: boolean, date?: Date, id?: string) {
-        this.id = id ? id : v4();                     // UUID
-        this.title = title;
-        this.desc = desc;
-        this.date = date ? date : new Date();
-        this.priority = priority;
-        this.complete = complete;
-    }
-
-    /**
-     * Toggles whether a Task is complete or not
-     * 
-     * @params None
-     * @return {void} None
-     */
-    public toggleComplete(): void {
-        this.complete = !this.complete;
-    }
-
-    /**
-     * Renames the title of the task
-     * 
-     * @param {string} newName The title to change to 
-     * @returns {boolean} True if completed, false otherwise
-     */
-    public renameTask(newName: string): boolean {
-        try {
-            this.title = newName;
-            return true;
-        } catch (e) {
-            return false;
-        }
-    }
+export class Goal extends Initiative {
+    constructor(init: Date, title: string, desc: string, priority: number, complete: boolean, date?: Date, id?: string) {
+        super(init, title, desc, priority, complete, date, id);
+    };
 }

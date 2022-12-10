@@ -17,11 +17,12 @@ export class TaskRule extends Rule {
      * @param {Date} date Date to check if rule applies
      * @returns {Task | void} Task if applies to date, undefined otherwise
      */
-    public getTask(date: Date): Task | void {
+    public getTask(date: Date): Task | undefined {
 
         if (this.isExpired(date) || date < this.init) { return; }
 
         const id: string = this.id + "-" + String(date.getFullYear()) + String(date.getMonth()) + String(date.getDate());
+        const init: Date = this.init;
         const title: string = this.title;
         const desc: string = this.desc;
         const priority: number = this.priority;
@@ -48,7 +49,22 @@ export class TaskRule extends Rule {
             default:
                 return;
         }
-        return new Task(title, desc, priority, complete, date, id);
+        return new Task(init, title, desc, priority, complete, date, id);
+    }
+
+
+    public getFirebaseTaskRule(): any {
+        return {
+            id: this.id,
+            init: this.init.getTime(),
+            until: this.until ? this.until : "undefined",
+            repeat: this.repeat,
+            on: this.on,
+            at: this.at,
+            title: this.title,
+            desc: this.desc,
+            priority: this.priority
+        }
     }
 
 }
