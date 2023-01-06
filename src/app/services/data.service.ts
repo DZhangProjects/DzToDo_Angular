@@ -114,6 +114,26 @@ export class DataService {
     }
 
     /**
+     * Creates a new Goal Rule in the realtime database
+     * @param {string} user User firebase id
+     * @param {GoalRule} newGoalRule new Goal Rule object to add to database
+     */
+    public async deleteGoalRule(user: string, newGoalRule: GoalRule): Promise<void> {
+        const db = getDatabase(this.firebaseApp, this.databaseURL);
+        await set(ref(db, "users/" + user + "/goalRules/" + newGoalRule.id), null);
+    }
+
+    /**
+     * Creates a new Task Rule in the realtime database
+     * @param {string} user User firebase id
+     * @param {TaskRule} newTaskRule new Task Rule object to add to database
+     */
+    public async deleteTaskRule(user: string, newTaskRule: TaskRule): Promise<void> {
+        const db = getDatabase(this.firebaseApp, this.databaseURL);
+        await set(ref(db, "users/" + user + "/taskRules/" + newTaskRule.id), null);
+    }
+
+    /**
      * Creates a Firestore document for a user with the completedGoals field if it does not already exist
      * @param {string} user User firebase id
      */
@@ -229,7 +249,6 @@ export class DataService {
         const tasks: Task[] = [];
         for (const taskRule of this.taskRules) {
             const task: Task | undefined = taskRule.getTask(date);
-            console.log(task);
             if (task) { tasks.push(task) };
         }
         return tasks;

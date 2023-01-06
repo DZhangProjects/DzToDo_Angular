@@ -18,7 +18,8 @@
 
 .rule-newBtn {
     width: 100%;
-    height: 10%;
+    height: calc(12% - 4px);
+    min-height: 4rem;
     background-color: $colorPurple;
     border-top: 4px solid $colorBlack;
     display: flex;
@@ -35,8 +36,16 @@
 
 .rule-listBox {
     width: 100%;
-    height: 90%;
+    height: 88%;
     border-right: 4px solid $colorBlack;
+    display: block;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.rule-listBox::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .rule-listItem {
@@ -59,7 +68,7 @@
 
 .rule-detailsBox {
     width: calc(100% - #{$widthRules});
-    height: 100%;
+    height: calc(100% - 16px);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -80,7 +89,7 @@
 
 .rule-prioLabel {
     font-family: $fontPrimary;
-    font-size: 1rem;
+    font-size: 1vw;
     margin-bottom: 0.25rem;
     margin-top: 0.25rem;
 }
@@ -181,6 +190,19 @@
     position: relative;
     top: -1rem;
     padding: 2rem;
+}
+
+.rule-trash {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    font-family: $fontAS;
+    font-size: 1.25rem;
+    color: $colorGray6;
+}
+
+.rule-trash:hover {
+    color: $colorRed3;
 }
 
 .rule-edit {

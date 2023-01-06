@@ -31,6 +31,8 @@
         
         <div [ngClass]="formTypeClass" *ngIf="activeRule && newEdit != 'edit'">
 
+            <div class="rule-trash noselect clickable">&#xf2ed;</div>
+
             <div class="rule-edit">{{ formType == 'task' ? 'Task' : 'Goal'}} Rule</div>
 
             <div class="rule-label">{{ activeRule.title }}</div>

@@ -20,6 +20,11 @@ const routes: Routes = [
     component: RulesComponent,
     canActivate: [AuthGuardService]
   },
+  {
+    path: 'rules/:fromHome',
+    component: RulesComponent,
+    canActivate: [AuthGuardService]
+  },
   { path: '**', redirectTo: 'login' }
 ];
 

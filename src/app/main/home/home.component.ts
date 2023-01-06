@@ -14,7 +14,8 @@ import { TaskRule } from 'src/app/interfaces/TaskRule';
 export class HomeComponent implements OnInit {
     constructor(
         private _dataService: DataService,
-        private _authService: AuthService
+        private _authService: AuthService,
+        private _router: Router,
     ) { }
 
     currentDay: Date = new Date();
@@ -86,6 +87,10 @@ export class HomeComponent implements OnInit {
                 this.initForDay(this.currentDay);
             });
         });
+    }
+
+    public toRules(): void {
+        this._router.navigate(['/rules', 'true']);
     }
 
 }

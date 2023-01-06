@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GoalRule } from 'src/app/interfaces/GoalRule';
 import { TaskRule } from 'src/app/interfaces/TaskRule';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,7 +14,8 @@ import '../../interfaces/Number';
 export class RulesComponent implements OnInit {
     constructor(
         private _dataService: DataService,
-        private _authService: AuthService
+        private _authService: AuthService,
+        private _route: ActivatedRoute
     ) { }
 
     taskRules: TaskRule[] = [];
@@ -47,6 +48,7 @@ export class RulesComponent implements OnInit {
     untilValue: string = '';
 
     ngOnInit(): void {
+        this.initFromPath();
         this.initRules();
         this.initDayList();
         this.initHourList();
@@ -65,6 +67,16 @@ export class RulesComponent implements OnInit {
             default:
                 this.formTypeClass = "rule-detailsFrame bgBlueStatic";
         }
+    }
+
+    public initFromPath(): void {
+        this._route.params.subscribe((params: Params) => {
+            if (params['fromHome']) {
+                if (params['fromHome'] == 'true') {
+                    this.toFormType('goal', 'new');
+                }
+            }
+        })
     }
 
     public initRules(): void {
