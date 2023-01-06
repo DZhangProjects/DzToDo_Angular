@@ -1,1 +1,33 @@
 @import "../../styles.scss";
+
+.login-bg {
+    width: 100%;
+    position: relative;
+    top: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-frame {
+    width: $widthLogin;
+    height: $heightLogin;
+    background-color: $colorOrange3;
+    border: 4px solid $colorBlack;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.login-title {
+    margin-top: 2rem;
+    font-family: $fontPrimaryBold;
+    font-size: 2rem;
+}
+
+.login-gsn {
+    margin-top: 2rem;
+}

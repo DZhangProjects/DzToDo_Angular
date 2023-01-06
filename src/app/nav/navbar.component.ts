@@ -9,7 +9,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class NavbarComponent {
     constructor(
-        private _authService: AuthService
+        private _authService: AuthService,
+        private _router: Router
     ) { }
 
     dock: boolean = false;
@@ -24,5 +25,13 @@ export class NavbarComponent {
     public async signin(): Promise<void> {
         console.log("Init Signin");
         await this._authService.signin();
+    }
+
+    public toSchedule(): void {
+        this._router.navigate(['']);
+    }
+
+    public toRules(): void {
+        this._router.navigate(['rules']);
     }
 }

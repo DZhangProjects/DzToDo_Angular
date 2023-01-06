@@ -4,13 +4,13 @@
 
     <div class="home-week">
         <div class="home-weekL clickable">&#xf104;</div>
-        <div class="home-weekDay">
+        <div class="home-weekDay" *ngFor="let day of weekGoals">
             <div class="home-weekDayTitle">
-                <div class="amikoBold">SUNDAY</div>
+                <div class="amikoBold">{{ daysOfWeek[day[0].date.getDay()] }}</div>
             </div>
             <div class="home-weekDayTasks">
-                <div class="home-weekDayTask">
-                    <div class="amiko ml">Goal</div>
+                <div class="home-weekDayTask clickable" *ngFor="let goal of day" (click)="toggleGoalComplete(goal)">
+                    <div class="amiko ml">{{ goal.title }}</div>
                 </div>
                 <!-- <div class="home-weekDayTask">
                     <div class="amiko ml">Goal</div>
@@ -48,12 +48,12 @@
                 <div class="amikoBold">HH:MM:SS</div>
             </div>
             <div class="home-hours">
-                <div class="home-hour">
+                <div class="home-hour" *ngFor="let hour of currentDayTasks">
                     <div class="home-hourTime">
-                        <div class="amikoBold">11:00</div>
+                        <div class="amikoBold">{{ hour.date.getHours() }}:00</div>
                     </div>
                     <div class="home-hourTask">
-                        <div class="amiko">Task</div>
+                        <div class="amiko">{{ hour.title }}</div>
                     </div>
                 </div>
             </div>
@@ -65,8 +65,8 @@
                 <div class="amikoBold">GOALS</div>
             </div>
             <div class="home-goalsList">
-                <div class="home-goal clickable">
-                    <div class="amikoBold">Goal</div>
+                <div class="home-goal clickable" *ngFor="let goal of currentDayGoals" (click)="toggleGoalComplete(goal)">
+                    <div class="amikoBold">{{ goal.title }}</div>
                 </div>
             </div>
             <div class="home-newGoal clickable">

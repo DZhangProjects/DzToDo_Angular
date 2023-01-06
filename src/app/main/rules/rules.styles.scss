@@ -1,0 +1,332 @@
+@import "../../../styles.scss";
+
+.rule-box {
+    width: 100%;
+    height: calc(100vh - #{$heightNav});
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 4px solid $colorBlack;
+}
+
+.rule-left {
+    width: $widthRules;
+    height: 100%;
+    border-right: 4px solid $colorBlack;
+}
+
+.rule-newBtn {
+    width: 100%;
+    height: 10%;
+    background-color: $colorPurple;
+    border-top: 4px solid $colorBlack;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: $fontPrimaryBold;
+    font-size: 1.5rem;
+}
+
+.rule-newBtn:hover {
+    background-color: $colorPurple2;
+}
+
+.rule-listBox {
+    width: 100%;
+    height: 90%;
+    border-right: 4px solid $colorBlack;
+}
+
+.rule-listItem {
+    width: 100%;
+    height: 6.5rem;
+    border-bottom: 2px solid $colorBlack;
+}
+
+.rule-title {
+    font-family: $fontPrimaryBold;
+    font-size: 0.9rem;
+    padding: 1.5rem 0 0 2rem;
+}
+
+.rule-subtitle {
+    font-family: $fontPrimary;
+    font-size: 0.9rem;
+    padding: 1rem 0 0 2rem;
+}
+
+.rule-detailsBox {
+    width: calc(100% - #{$widthRules});
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.rule-prioBox {
+    width: 5%;
+    height: 25%;
+    position: relative;
+    top: -1rem;
+    left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.rule-prioLabel {
+    font-family: $fontPrimary;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.rule-prio {
+    width: 100%;
+    height: 40%;
+    background-color: white;
+    border: 4px solid $colorBlack;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: $fontPrimaryBold;
+    font-size: 1.85rem;
+}
+
+.rule-prioUp {
+    width: 100%;
+    height: 30%;
+    border-top: 4px solid $colorBlack;
+    border-left: 4px solid $colorBlack;
+    border-right: 4px solid $colorBlack;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    background-color: $colorPurple;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: $fontAS;
+    font-size: 1.85rem;
+}
+
+.rule-prioDown {
+    width: 100%;
+    height: 30%;
+    border-bottom: 4px solid $colorBlack;
+    border-left: 4px solid $colorBlack;
+    border-right: 4px solid $colorBlack;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background-color: $colorPurple;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: $fontAS;
+    font-size: 1.85rem;
+}
+
+.rule-taskGoalFrame {
+    width: 37.5%;
+    height: 20%;
+    // border: 4px solid $colorBlack;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -2rem;
+    padding: 2rem;
+}
+
+.rule-taskGoal {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2.5%;
+    border-radius: 10px;
+    border: 4px solid $colorBlack;
+}
+
+.rule-tgIcon {
+    font-family: $fontAS;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.rule-tgLabel {
+    font-family: $fontPrimaryBold;
+    font-size: 2rem;
+}
+
+.rule-detailsFrame {
+    width: 37.5%;
+    height: auto;
+    border: 4px solid $colorBlack;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+    top: -1rem;
+    padding: 2rem;
+}
+
+.rule-edit {
+    font-family: $fontPrimaryBold;
+    font-size: 2rem;
+    margin: 1rem auto 2rem auto;
+}
+
+.rule-label {
+    font-family: $fontPrimaryBold;
+    font-size: 0.9rem;
+    color: $colorGray2;
+}
+
+.rule-titleInput {
+    width: 40%;
+    height: 1.75rem;
+    font-family: $fontPrimary;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+    border: 1px solid $colorGray;
+    padding-left: 0.4rem;
+}
+
+.rule-descInput {
+    width: calc(100% - 0.4rem);
+    min-height: 3rem;
+    height: 6rem;
+    border-radius: 5px;
+    border: 1px solid $colorGray;
+    font-family: $fontPrimary;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    padding-top: 0.4rem;
+    padding-left: 0.4rem;
+}
+
+.rule-repeatBox {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.rule-every {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 2rem;
+    position: relative;
+    left: -0.2rem;
+}
+
+.rule-everyLabel {
+    font-family: $fontPrimary;
+    font-size: 0.9rem;
+    margin-left: 0.25rem;
+    position: relative;
+    top: 0.15rem;
+    color: $colorGray5;
+}
+
+.rule-onAtForUntil {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.rule-on {
+    margin-top: 0.25rem;
+    width: 7rem;
+    height: 2rem;
+    font-family: $fontPrimary;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: 1px solid $colorGray;
+}
+
+.rule-onBox, .rule-atBox {
+    margin-right: 2rem;
+}
+
+.rule-forInput {
+    width: 2.5rem;
+    height: 1.75rem;
+    font-family: $fontPrimary;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: 1px solid $colorGray;
+    margin-top: 0.25rem;
+    padding-left: 0.4rem;
+}
+
+.rule-forBox {
+    width: 6rem;
+    margin-right: 2rem;
+}
+
+.rule-submitBtn {
+    width: 100%;
+    height: 4rem;
+    margin: 2rem 0 1rem 0;
+    background-color: $colorGreen;
+    font-family: $fontPrimaryBold;
+    font-size: 2rem;
+    border-radius: 10px;
+    border: 4px solid $colorBlack;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+// Datepicker
+
+[type="date"] {
+    background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 3px 5px;
+    width: 10rem;
+    height: 1.75rem;
+    font-family: $fontPrimary;
+    font-size: 0.9rem;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+[type="date"]::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+}

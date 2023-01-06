@@ -1,8 +1,8 @@
 <div class="nav-body">
     <div class="nav-title clickable">DzToDo</div>
     <div class="nav-links">
-        <div class="nav-link clickable">SCHEDULE</div>
-        <div class="nav-link clickable">RULES</div>
+        <div class="nav-link clickable" (click)="toSchedule()">SCHEDULE</div>
+        <div class="nav-link clickable" (click)="toRules()">RULES</div>
     </div>
     <div class="nav-pfp clickable" (click)="toggleDock()">&#xf007;</div>
     <div class="nav-signin" *ngIf="dock">

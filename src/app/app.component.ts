@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     const app = initializeApp(environment.firebaseConfig);
     this._dataService.setFirebaseApp(app);
+    this._dataService.setFirestore();
     this._analyticsService.setAnalytics(getAnalytics(app));
     // this._databaseService.getRealtimeRankings().then(() => {
     // this._dataService.realtimeToRanking();

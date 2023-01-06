@@ -35,7 +35,8 @@ export class AuthService {
             } else {
                 this.authToken = credential.accessToken ? credential.accessToken : "";
                 this.user = result.user;
-                await this._dataService.getRules(this.user.uid);
+                await this._dataService.initData(this.user.uid);
+                // await this._dataService.setCompletedGoals(this.user.uid, 'test', true);
                 // await this._dataService.getTaskRules(this.user.uid);
                 // await this._dataService.getGoalRules(this.user.uid);
                 // console.log(this._dataService.getDisplayTasks(new Date()));
@@ -53,5 +54,13 @@ export class AuthService {
      */
     public async signin(): Promise<boolean> {
         return this.signinPopup(this.auth, this.provider);
+    }
+
+    /**
+     * Checks if user has been authenticated for Auth Guard. Actually checks if there is a user UID.
+     * @returns {boolean} True if uid exists, false otherwise
+     */
+    public isAuthenticated(): boolean {
+        return this.user ? (this.user.uid ? true : false) : false;
     }
 }

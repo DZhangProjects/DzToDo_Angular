@@ -2,13 +2,31 @@
 
 $colorGreen: #cbe8ba;
 $colorGreen2: #b6dd9f;
+$colorGreen3: #9cc982;
+$colorGreen4: #b6dd9f;
 $colorBlue: #a8c6fa;
+$colorBlue2: #9ec1ff;
+$colorBlue3: #bfd7ff;
+$colorBlue4: #b8d1ff;
+$colorBlue5: #ebf2ff;
 $colorPurple: #dacafb;
+$colorPurple2: #e4d6ff;
+$colorPurple3: #e5d7ff;
+$colorPurple4: #d1bbff;
+$colorPurple5: #caafff;
 $colorOrange: #ffd8ad;
 $colorOrange2: #ffd19f;
+$colorOrange3: #ffe9d1;
+$colorOrange4: #ffd19f;
+$colorOrange5: #ffc78b;
+$colorOrange6: #fff6ec;
 $colorBlack: #232323;
 $colorBlack2: #333333;
 $colorGray: #c0c0c0;
+$colorGray2: #777777;
+$colorGray3: #fcfcfc;
+$colorGray4: #f7f7f7;
+$colorGray5: #c2c2c2;
 $colorWhite: #f5f5f5;
 
 $fontPrimary: "Amiko";
@@ -18,9 +36,12 @@ $fontAR: "FA-Regular";
 $fontAS: "FA-Solid";
 
 $widthWeek: calc(((100% - 4rem - 8px)/7) - 4px);
+$widthLogin: 30rem;
+$widthRules: 22%;
 
 $heightNav: 5.94rem;
 $heightWeek: 12rem;
+$heightLogin: 15rem;
 
 
 @font-face {
@@ -51,12 +72,15 @@ $heightWeek: 12rem;
 body {
     margin: 0;
     padding: 0;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
-body::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+body::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
 }
 
 .clickable {
@@ -81,4 +105,90 @@ body::-webkit-scrollbar {
 
 .complete {
     text-decoration: line-through;
+}
+
+.bgBlueStatic {
+    background-color: $colorBlue5;
+}
+
+.bgBlue {
+    background-color: $colorBlue3;
+}
+
+.bgBlue:hover {
+    background-color: $colorBlue4;
+}
+
+.bgBlue:active {
+    background-color: $colorBlue2;
+}
+
+.bgOrangeStatic {
+    background-color: $colorOrange6;
+}
+
+.bgOrange {
+    background-color: $colorOrange;
+}
+
+.bgOrange:hover {
+    background-color: $colorOrange4;
+}
+
+.bgOrange:active {
+    background-color: $colorOrange5;
+}
+
+.bgGreenStatic {
+    background-color: $colorGreen;
+}
+
+.bgGreen {
+    background-color: $colorGreen;
+}
+
+.bgGreen:hover {
+    background-color: $colorGreen2;
+}
+
+.bgGreen:active {
+    background-color: $colorGreen3;
+}
+
+.bgPurpleStatic {
+    background-color: $colorPurple;
+}
+
+.bgPurple {
+    background-color: $colorPurple3;
+}
+
+.bgPurple:hover {
+    background-color: $colorPurple4;
+}
+
+.bgPurple:active {
+    background-color: $colorPurple5;
+}
+
+
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.mb2 {
+    margin-bottom: 2rem;
 }

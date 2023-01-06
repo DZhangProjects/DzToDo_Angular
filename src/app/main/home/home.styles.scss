@@ -69,7 +69,7 @@
 .home-weekDayTasks {
     width: 100%;
     max-height: calc(100% - 20% - 4px);
-    display: flex;
+    display: block;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -96,6 +96,10 @@
     padding: 0.4rem;
     // white-space: pre;
     border-bottom: 1px solid $colorGray;
+}
+
+.home-weekDayTask:hover {
+    background-color: $colorOrange2;
 }
 
 .home-weekDayNum {
@@ -137,7 +141,7 @@
 .home-title {
     background-color: $colorPurple;
     width: 100%;
-    height: calc(0.2*(#{$heightWeek}));
+    height: calc(0.3*(#{$heightWeek}));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -150,8 +154,9 @@
 
 .home-hours {
     width: 100%;
-    height: calc(0.2*(#{$heightWeek}));
-    display: flex;
+    // height: calc(0.2*(#{$heightWeek}));
+    max-height: calc(100% - 0.2*(#{$heightWeek}));
+    display: block;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -166,7 +171,7 @@
 
 .home-hour {
     width: 100%;
-    height: 100%;
+    height: 3rem;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -262,4 +267,8 @@
 
 .home-newGoal:hover {
     background-color: $colorGreen2;
+}
+
+.strike {
+    text-decoration: line-through;
 }

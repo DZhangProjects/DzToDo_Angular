@@ -1,0 +1,149 @@
+<div class="rule-box">
+    <div class="rule-left">
+        <div class="rule-listBox">
+            <div class="rule-listItem clickable bgBlue" (click)="setActiveRule(task)" *ngFor="let task of taskRules">
+                <div class="rule-title">{{ task.title }}</div>
+                <div class="rule-subtitle">{{ getSubtitle(task) }}</div>
+            </div>
+            <div class="rule-listItem clickable bgOrange" (click)="setActiveRule(goal)" *ngFor="let goal of goalRules">
+                <div class="rule-title">{{ goal.title }}</div>
+                <div class="rule-subtitle">{{ getSubtitle(goal) }}</div>
+            </div>
+        </div>
+        <div class="rule-newBtn clickable" (click)="toFormType(undefined); setActiveRule(undefined)">+ New Rule</div>
+    </div>
+    
+
+    <div class="rule-detailsBox">
+
+        <div class="rule-taskGoalFrame" *ngIf="!formType && !activeRule">
+            <div class="rule-taskGoal clickable bgBlue" (click)="toFormType('task', 'new')">
+                <div class="rule-tgIcon">&#xf274;</div>
+                <div class="rule-tgLabel">New Task</div>
+            </div>
+            <div class="rule-taskGoal clickable bgOrange" (click)="toFormType('goal', 'new')">
+                <div class="rule-tgIcon">&#xf140;</div>
+                <div class="rule-tgLabel">New Goal</div>
+            </div>
+        </div>
+
+
+        
+        <div [ngClass]="formTypeClass" *ngIf="activeRule && newEdit != 'edit'">
+
+            <div class="rule-edit">{{ formType == 'task' ? 'Task' : 'Goal'}} Rule</div>
+
+            <div class="rule-label">{{ activeRule.title }}</div>
+
+            <div class="rule-label">{{ activeRule.desc }}</div>
+
+            <div class="rule-label">{{ activeRule.repeat == 'never' ? 'Never Repeats' : 'Repeats every ' + activeRule.repeat }}</div>
+
+            <!-- <div class="rule-onAtForUntil"> -->
+
+                <div class="rule-onBox" *ngIf="activeRule.repeat != 'day' && activeRule.repeat != 'never'">
+                    <div class="rule-label">{{ activeRule.repeat == 'week' ? 'On ' + weekList[activeRule.on] : activeRule.repeat == 'month' ? 'On the ' + dayList[activeRule.on] : activeRule.repeat == 'year' ? 'On the ' +  activeRule.on.toOrdinal() + ' day of the year' : '' }}</div>
+                </div>
+
+                <div class="rule-atBox" *ngIf="formType == 'task'">
+                    <div class="rule-label">At {{ hourList[activeTaskRule.at] }}</div>
+                </div>
+
+                <div class="rule-forBox" *ngIf="formType == 'goal' && activeRule.repeat != 'day'">
+                    <div class="rule-label">For {{ activeGoalRule.forDays }} Consecutive Days</div>
+                </div>
+
+                <div class="rule-untilBox" *ngIf="activeRule.repeat != 'never' && activeRule.until">
+                    <div class="rule-label">Until {{ activeRule.until.toMDY() }}</div>
+                </div>
+                
+            <!-- </div> -->
+
+            <div class="rule-submitBtn bgGreen clickable" (click)="newEdit = 'edit'">Edit</div>
+            
+        </div>
+
+
+        <div [ngClass]="formTypeClass" *ngIf="(formType && !activeRule) || (activeRule && newEdit == 'edit')">
+
+            <div class="rule-edit">{{ newEdit == "new" ? "Add " : "Edit " }} {{ formType == 'task' ? 'Task' : 'Goal'}} Rule</div>
+
+            <div class="rule-label">Title:</div>
+            <input class="rule-titleInput" [(ngModel)]="formTitle" />
+
+            <div class="rule-label">Description:</div>
+            <textarea class="rule-descInput" [(ngModel)]="formDesc"></textarea>
+
+            <div class="rule-label">Repeat Every:</div>
+            <div class="rule-repeatBox">
+                <div class="rule-every">
+                    <input type="radio" name="every" value="day" [(ngModel)]="formRepeat" />
+                    <div class="rule-everyLabel">Day</div>
+                </div>
+                <div class="rule-every">
+                    <input type="radio" name="every" value="week" [(ngModel)]="formRepeat" />
+                    <div class="rule-everyLabel">Week</div>
+                </div>
+                <div class="rule-every">
+                    <input type="radio" name="every" value="month" [(ngModel)]="formRepeat" />
+                    <div class="rule-everyLabel">Month</div>
+                </div>
+                <div class="rule-every">
+                    <input type="radio" name="every" value="year" [(ngModel)]="formRepeat" />
+                    <div class="rule-everyLabel">Year</div>
+                </div>
+                <div class="rule-every">
+                    <input type="radio" name="every" value="never" [(ngModel)]="formRepeat" />
+                    <div class="rule-everyLabel">Never</div>
+                </div>
+            </div>
+
+            <div class="rule-onAtForUntil">
+
+                <div class="rule-onBox" *ngIf="formRepeat != 'day'">
+                    <div class="rule-label">On{{ formRepeat == 'month' ? ' the:' : ':' }}</div>
+                    <select class="rule-on" *ngIf="formRepeat == 'week'" [(ngModel)]="onValue">
+                        <option *ngFor="let day of weekList">{{ day }}</option>
+                    </select>
+                    <select class="rule-on" *ngIf="formRepeat == 'month'" [(ngModel)]="onValue">
+                        <option *ngFor="let day of dayList">{{ day }}</option>
+                    </select>
+                    <input *ngIf="formRepeat == 'year' || formRepeat == 'never'" type="date" [(ngModel)]="onValue">
+                </div>
+
+                <div class="rule-atBox" *ngIf="formType == 'task'">
+                    <div class="rule-label">At:</div>
+                    <select class="rule-on" [(ngModel)]="atValue">
+                        <option *ngFor="let hour of hourList">{{ hour }}</option>
+                    </select>
+                </div>
+
+                <div class="rule-forBox" *ngIf="formType == 'goal' && formRepeat != 'day'">
+                    <div class="rule-label">For x Days:</div>
+                    <input type="number" class="rule-forInput" [(ngModel)]="formForDays">
+                </div>
+
+                <div class="rule-untilBox" *ngIf="formRepeat != 'never'">
+                    <div class="rule-label">Until:</div>
+                    <input type="date" [(ngModel)]="untilValue">
+                </div>
+                
+            </div>
+
+            <div class="rule-submitBtn bgGreen clickable" (click)="submit()">Submit</div>
+            
+        </div>
+
+        
+        
+        <div class="rule-prioBox"  *ngIf="(formType && !activeRule) || (activeRule && newEdit == 'edit')">
+            <div class="rule-prioUp clickable bgPurple noselect" (click)="setFormPriority(formPriority + 1)">&#xf077;</div>
+            <div class="rule-prio">
+                <div class="rule-prioLabel">Priority</div>
+                <div class="rule-prioValue">{{ formPriority }}</div>
+            </div>
+            <div class="rule-prioDown clickable bgPurple noselect" (click)="setFormPriority(formPriority - 1)">&#xff078;</div>
+        </div>
+
+    </div>
+</div>
