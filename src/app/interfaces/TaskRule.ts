@@ -6,8 +6,8 @@ export class TaskRule extends Rule {
 
     at: number;
 
-    constructor(repeat: "day" | "week" | "month" | "year" | "never", on: number, at: number, title: string, desc: string, priority: number, init?: Date, until?: Date) {
-        super(repeat, on, title, desc, priority, init, until);
+    constructor(repeat: "day" | "week" | "month" | "year" | "never", on: number, at: number, title: string, desc: string, priority: number, init?: Date, until?: Date, id?: string) {
+        super(repeat, on, title, desc, priority, init, until, id);
         this.at = at;
     }
 
@@ -18,10 +18,11 @@ export class TaskRule extends Rule {
      * @returns {Task | void} Task if applies to date, undefined otherwise
      */
     public getTask(date: Date): Task | undefined {
+        const newDate: Date = date.copy();
 
-        if (this.isExpired(date) || date < this.init) { return; }
+        if (this.isExpired(newDate) || newDate < this.init.toStart()) { return; }
 
-        const id: string = this.id + "-" + String(date.getFullYear()) + String(date.getMonth()) + String(date.getDate());
+        const id: string = this.id + "-" + String(newDate.getFullYear()) + String(newDate.getMonth()) + String(newDate.getDate());
         const init: Date = this.init;
         const title: string = this.title;
         const desc: string = this.desc;
@@ -29,27 +30,40 @@ export class TaskRule extends Rule {
         const complete: boolean = false;
         switch (this.repeat) {
             case "day":
-                date.setHours(this.at);
+                newDate.setHours(this.at);
                 break
             case "week":
-                if (date.getDay() == this.on) {
-                    date.setHours(this.at);
+                if (newDate.getDay() == this.on) {
+                    newDate.setHours(this.at);
+                } else {
+                    return;
                 }
                 break;
             case "month":
-                if (date.getDate() == this.on) {
-                    date.setHours(this.at);
+                if (newDate.getDate() == this.on) {
+                    newDate.setHours(this.at);
+                } else {
+                    return;
                 }
                 break;
             case "year":
-                if (date.getDOY() == this.on) {
-                    date.setHours(this.at);
+                if (newDate.getDOY() == this.on) {
+                    newDate.setHours(this.at);
+                } else {
+                    return;
+                }
+                break;
+            case "never":
+                if (newDate.toMDY() == this.init.toMDY()) {
+                    newDate.setHours(this.at);
+                } else {
+                    return;
                 }
                 break;
             default:
                 return;
         }
-        return new Task(init, title, desc, priority, complete, date, id);
+        return new Task(init, title, desc, priority, complete, newDate, id);
     }
 
 

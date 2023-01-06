@@ -6,6 +6,7 @@ import { Goal } from "../interfaces/Goal";
 import { Task } from "../interfaces/Task";
 import { GoalRule } from "../interfaces/GoalRule";
 import { TaskRule } from "../interfaces/TaskRule";
+import { v4 } from "uuid";
 
 
 @Injectable({
@@ -61,7 +62,7 @@ export class DataService {
         if (data) {
             for (const key of Object.keys(data)) {
                 const goalRule: any = data[key];
-                goalRules.push(new GoalRule(goalRule.repeat, goalRule.on, goalRule.title, goalRule.desc, goalRule.priority, new Date(goalRule.init), goalRule.until == "undefined" ? undefined : goalRule.until, goalRule.forDays));
+                goalRules.push(new GoalRule(goalRule.repeat, goalRule.on, goalRule.title, goalRule.desc, goalRule.priority, new Date(goalRule.init), goalRule.until == "undefined" ? undefined : goalRule.until, goalRule.forDays, goalRule.id));
             }
         }
         this.goalRules = goalRules;
@@ -76,7 +77,7 @@ export class DataService {
         if (data) {
             for (const key of Object.keys(data)) {
                 const taskRule: any = data[key];
-                taskRules.push(new TaskRule(taskRule.repeat, taskRule.on, taskRule.at, taskRule.title, taskRule.desc, taskRule.priority, new Date(taskRule.init), taskRule.until == "undefined" ? undefined : taskRule.until));
+                taskRules.push(new TaskRule(taskRule.repeat, taskRule.on, taskRule.at, taskRule.title, taskRule.desc, taskRule.priority, new Date(taskRule.init), taskRule.until == "undefined" ? undefined : taskRule.until, taskRule.id));
             }
         }
         this.taskRules = taskRules;
@@ -155,7 +156,6 @@ export class DataService {
 
         if (docSnap.exists()) {
             this.completedGoals = docSnap.data()['completedGoals'];
-            console.log("Document data:", docSnap.data()['completedGoals']);
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -212,9 +212,7 @@ export class DataService {
     public getWeekGoals(date: Date): Goal[][] {
         const weekGoals: Goal[][] = [[], [], [], [], [], [], []];
         const day: Date = date.getSunday();
-        console.log("getWeekGoals", date, day);
         for (let i = 0; i < weekGoals.length; i++) {
-            console.log("getWeekGoals Loop", day);
             weekGoals[i] = this.getGoals(day.copy());
             day.toTomorrow();
         }
@@ -231,6 +229,7 @@ export class DataService {
         const tasks: Task[] = [];
         for (const taskRule of this.taskRules) {
             const task: Task | undefined = taskRule.getTask(date);
+            console.log(task);
             if (task) { tasks.push(task) };
         }
         return tasks;
@@ -245,7 +244,7 @@ export class DataService {
     private getEmptyTask(date: Date, hour: number): Task {
         const newDate: Date = date.copy();
         newDate.setHours(hour);
-        return new Task(date, "", "", -1, false, newDate, "0");
+        return new Task(date, "", "", -1, false, newDate.copy(), v4() + 'PLACEHOLDER');
     }
 
 
@@ -272,7 +271,7 @@ export class DataService {
         const displayGoals: Task[] = this.getEmptyTaskArray(date);
         for (const task of this.getTasks(date)) {
             const hour: number = task.date.getHours();
-            if (displayGoals[hour].id == "0") {
+            if (displayGoals[hour].id.slice(-11) == 'PLACEHOLDER') {
                 displayGoals[hour] = task;
             } else {
                 displayGoals[hour] = displayGoals[hour].compare(task);

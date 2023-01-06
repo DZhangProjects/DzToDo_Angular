@@ -17,8 +17,8 @@ export class RulesComponent implements OnInit {
         private _authService: AuthService
     ) { }
 
-    taskRules: TaskRule[] = this._dataService.taskRules;
-    goalRules: GoalRule[] = this._dataService.goalRules;
+    taskRules: TaskRule[] = [];
+    goalRules: GoalRule[] = [];
 
     activeRule: TaskRule | GoalRule | undefined;                                                            // Whether there is an active rule to display
     activeTaskRule!: TaskRule;
@@ -47,6 +47,7 @@ export class RulesComponent implements OnInit {
     untilValue: string = '';
 
     ngOnInit(): void {
+        this.initRules();
         this.initDayList();
         this.initHourList();
     }
@@ -66,6 +67,11 @@ export class RulesComponent implements OnInit {
         }
     }
 
+    public initRules(): void {
+        this.taskRules = this._dataService.taskRules;
+        this.goalRules = this._dataService.goalRules;
+    }
+
     public initDayList(): void {
         const nums: string[] = [];
         for (let i = 0; i < 31; i++) {
@@ -82,8 +88,23 @@ export class RulesComponent implements OnInit {
         this.hourList = hours;
     }
 
+    public setRuleFromId(id: string): void {
+        if (this.formType == 'goal') {
+            for (const goal of this.goalRules) {
+                if (goal.id == id) {
+                    this.setActiveRule(goal);
+                }
+            }
+        } else if (this.formType == 'task') {
+            for (const task of this.taskRules) {
+                if (task.id == id) {
+                    this.setActiveRule(task);
+                }
+            }
+        }
+    }
+
     public setActiveRule(rule: GoalRule | TaskRule | undefined): void {
-        console.log("setactiverule:", rule);
         this.activeRule = rule;
 
         if (rule != undefined) {
@@ -166,12 +187,12 @@ export class RulesComponent implements OnInit {
 
     public generateTaskRule(): TaskRule {
         this.setFormVars();
-        return this.newEdit == 'edit' ? this.activeTaskRule : new TaskRule(this.formRepeat, this.formOn, this.hourList.indexOf(this.atValue), this.formTitle, this.formDesc, this.formPriority, new Date(), this.formUntil);
+        return new TaskRule(this.formRepeat, this.formOn, this.hourList.indexOf(this.atValue), this.formTitle, this.formDesc, this.formPriority, new Date(), this.formUntil, this.activeRule ? this.activeTaskRule.id : undefined);
     }
 
     public generateGoalRule(): GoalRule {
         this.setFormVars();
-        return this.newEdit == 'edit' ? this.activeGoalRule : new GoalRule(this.formRepeat, this.formOn, this.formTitle, this.formDesc, this.formPriority, new Date(), this.formUntil, this.formForDays);
+        return new GoalRule(this.formRepeat, this.formOn, this.formTitle, this.formDesc, this.formPriority, new Date(), this.formUntil, this.formForDays, this.activeRule ? this.activeGoalRule.id : undefined);
     }
 
     public async submit(): Promise<void> {
@@ -180,13 +201,21 @@ export class RulesComponent implements OnInit {
                 case "goal":
                     const goalRule: GoalRule = this.generateGoalRule();
                     await this._dataService.setGoalRule(this._authService.user.uid, goalRule).then(async () => {
-                        await this._dataService.initData(this._authService.user.uid);
+                        await this._dataService.initData(this._authService.user.uid).then(() => {
+                            this.initRules();
+                            this.newEdit = undefined;
+                            this.setRuleFromId(this.activeRule ? this.activeRule.id : goalRule.id);
+                        });
                     });
                     break;
                 case "task":
                     const taskRule: TaskRule = this.generateTaskRule();
                     await this._dataService.setTaskRule(this._authService.user.uid, taskRule).then(async () => {
-                        await this._dataService.initData(this._authService.user.uid);
+                        await this._dataService.initData(this._authService.user.uid).then(() => {
+                            this.initRules();
+                            this.newEdit = undefined;
+                            this.setRuleFromId(this.activeRule ? this.activeRule.id : taskRule.id);
+                        });
                     });
             }
         }

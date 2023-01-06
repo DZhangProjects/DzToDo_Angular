@@ -6,8 +6,8 @@ export class GoalRule extends Rule {
 
     forDays: number;
 
-    constructor(repeat: "day" | "week" | "month" | "year" | "never", on: number, title: string, desc: string, priority: number, init?: Date, until?: Date, forDays?: number) {
-        super(repeat, on, title, desc, priority, init, until);
+    constructor(repeat: "day" | "week" | "month" | "year" | "never", on: number, title: string, desc: string, priority: number, init?: Date, until?: Date, forDays?: number, id?: string) {
+        super(repeat, on, title, desc, priority, init, until, id);
         this.forDays = forDays ? forDays : 1;
     }
 

@@ -11,9 +11,9 @@ export class Rule {
     desc: string;                                           // Long description of Task/Goal to display when expanded
     priority: number;                                       // Level of priority of Task/Goal (Has Due Date / Sometime Today / Sometime Soon / Sometime in the Future)
 
-    constructor(repeat: "day" | "week" | "month" | "year" | "never", on: number, title: string, desc: string, priority: number, init?: Date, until?: Date) {
+    constructor(repeat: "day" | "week" | "month" | "year" | "never", on: number, title: string, desc: string, priority: number, init?: Date, until?: Date, id?: string) {
         // this.active = true;
-        this.id = v4();
+        this.id = id ? id : v4();
         this.init = init ? init : new Date();
         this.until = until;
         this.repeat = repeat;

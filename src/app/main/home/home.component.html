@@ -5,11 +5,11 @@
     <div class="home-week">
         <div class="home-weekL clickable">&#xf104;</div>
         <div class="home-weekDay" *ngFor="let day of weekGoals">
-            <div class="home-weekDayTitle">
+            <div [ngClass]="getCurrentDayClass(day[0].date)" (click)="initForDay(day[0].date)">
                 <div class="amikoBold">{{ daysOfWeek[day[0].date.getDay()] }}</div>
             </div>
             <div class="home-weekDayTasks">
-                <div class="home-weekDayTask clickable" *ngFor="let goal of day" (click)="toggleGoalComplete(goal)">
+                <div [ngClass]="getGoalClass(goal)" *ngFor="let goal of day" (click)="goal.id == 'None' ? '' : toggleGoalComplete(goal)" [style.text-decoration]="goal.complete ? 'line-through' : 'none'">
                     <div class="amiko ml">{{ goal.title }}</div>
                 </div>
                 <!-- <div class="home-weekDayTask">
@@ -52,21 +52,28 @@
                     <div class="home-hourTime">
                         <div class="amikoBold">{{ hour.date.getHours() }}:00</div>
                     </div>
-                    <div class="home-hourTask">
+                    <div class="home-hourTask" *ngIf="!isEdit(hour)" (click)="setEdit(hour)">
                         <div class="amiko">{{ hour.title }}</div>
+                    </div>
+                    <div class="home-hourTask" *ngIf="isEdit(hour)" >
+                        <input class="home-newTask" [(ngModel)]="editTaskName" />
+                        <div class="home-newConfirm">
+                            <div class="home-cancel bgRed clickable" (click)="setEdit(undefined)">&#xf00d;</div>
+                            <div class="home-submit bgGreen clickable" (click)="overrideTask(hour, editTaskName)">&#xf00c;</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="home-goals">
+        <div class="home-goals" (click)="setEdit(undefined)">
             <div class="home-goalsTitle">
                 <div class="amikoBold">GOALS</div>
             </div>
             <div class="home-goalsList">
-                <div class="home-goal clickable" *ngFor="let goal of currentDayGoals" (click)="toggleGoalComplete(goal)">
-                    <div class="amikoBold">{{ goal.title }}</div>
+                <div class="home-goal clickable" *ngFor="let goal of currentDayGoals" (click)="goal.id == 'None' ? '' : toggleGoalComplete(goal)" [style.text-decoration]="goal.complete ? 'line-through' : 'none'">
+                    <div class="amikoBold noselect">{{ goal.title }}</div>
                 </div>
             </div>
             <div class="home-newGoal clickable">

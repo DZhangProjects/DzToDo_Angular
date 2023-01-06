@@ -23,7 +23,6 @@ export class NavbarComponent {
     }
 
     public async signin(): Promise<void> {
-        console.log("Init Signin");
         await this._authService.signin();
     }
 

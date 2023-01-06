@@ -12,6 +12,7 @@ declare global {                    //https://stackoverflow.com/questions/398771
         getSunday(): Date;
         copy(): Date;
         toMDY(): string;
+        toStart(): Date;
     }
 }
 
@@ -61,18 +62,26 @@ Date.prototype.toYesterday = function () {
 Date.prototype.getSunday = function () {
     let sunday: Date = new Date(this.getTime());
     while (sunday.getDay() != 0) {
-        console.log("Sunday?", sunday);
         sunday.toYesterday();
     }
     return sunday;
 }
 
-// Gets last sunday (or this day if it is a sunday)
+// Returns a copy of the date
 Date.prototype.copy = function () {
     return new Date(this.getTime());
 }
 
-// Gets last sunday (or this day if it is a sunday)
+// Gets date in string of form MM/DD/YYYY
 Date.prototype.toMDY = function () {
     return String(this.getMonth() + 1) + '/' + String(this.getDate()) + '/' + String(this.getFullYear());
+}
+
+// 
+Date.prototype.toStart = function () {
+    const copy: Date = this.copy();
+    copy.setHours(0);
+    copy.setSeconds(0);
+    copy.setMilliseconds(0);
+    return copy.copy();
 }

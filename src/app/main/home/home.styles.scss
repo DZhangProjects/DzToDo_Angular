@@ -53,7 +53,6 @@
 }
 
 .home-weekDayTitle {
-    background-color: $colorPurple;
     width: 100%;
     height: 20%;
     display: flex;
@@ -84,6 +83,22 @@
 
 .home-weekDayTask {
     background-color: $colorOrange;
+    width: 100%;
+    // height: 35px !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    // font-family: $fontPrimary;
+    font-size: 0.9rem;
+    // padding: 4px 0 0 8px;
+    padding: 0.4rem;
+    // white-space: pre;
+    border-bottom: 1px solid $colorGray;
+}
+
+.home-noGoal {
+    background-color: $colorGray6;
     width: 100%;
     // height: 35px !important;
     display: flex;
@@ -201,6 +216,53 @@
     font-family: $fontPrimary;
     font-size: 0.9rem;
     padding-left: 1rem;
+}
+
+.home-newTask {
+    width: 80%;
+    height: 80%;
+    border-top: 1px solid transparent;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    border-bottom: 1px solid $colorGray;
+    background-color: transparent;
+    font-family: $fontPrimary;
+    font-size: 0.9rem;
+}
+
+.home-newTask:focus {
+    outline: none;
+}
+
+.home-newConfirm {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.home-cancel, .home-submit {
+    font-family: $fontAS;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+.home-cancel {
+    border: 2px solid $colorRed4;
+}
+
+.home-submit {
+    border: 2px solid $colorGreen5;
 }
 
 .home-goals {
